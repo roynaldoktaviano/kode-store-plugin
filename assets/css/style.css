@@ -88,7 +88,7 @@ text-decoration: none !important;
     width: 65%;
     height: 230px;
     object-fit: contain;
-    margin: 23px 0;
+    margin: 0 0 23px 0;
 }
 
 .promo-archive-short-description p, .short_desc_detail {
@@ -460,7 +460,11 @@ main .cards .card .bottom-flip {
 	.entry-content.promo-details{
     background-size: contain;
     background-position: center;  
-    padding: 0 40vw;
+    padding: 3vw 40vw;
+}
+
+.list-detail {
+  margin: 2vw 0 1vw 0px;
 }
 
 }
