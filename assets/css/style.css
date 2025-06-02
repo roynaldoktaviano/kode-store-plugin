@@ -457,13 +457,10 @@ main .cards .card .bottom-flip {
 	main .cards { /* Selector disesuaikan dari main { .cards {}} */
 		gap: 12px;
 	}
-	/* main .cards .top-half,
-	main .cards .bottom-half,
-	main .cards .top-flip,
-	main .cards .bottom-flip { 
-		font-size: 70px !important;
-		height: 80px !important;
-		width: 125px !important;
-		padding: 34px 7px !important;
-	} */
+	.entry-content.promo-details{
+    background-size: contain;
+    background-position: center;  
+    padding: 0 40vw;
+}
+
 }
