@@ -1,3 +1,6 @@
+// Syarat dan Ketentuan Pop Up
+
+
 document.addEventListener('DOMContentLoaded', function() {
   const display = document.getElementById('phoneNumberDisplay');
   const dialButtons = document.querySelectorAll('.dial-button');
@@ -5,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const deleteButton = document.getElementById('deleteButton');
 
   let currentNumber = '';
+
 
   dialButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -255,3 +259,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('rsp_script_vars is not defined. AJAX URL, nonce, and localized messages might be missing.');
     }
 });
+

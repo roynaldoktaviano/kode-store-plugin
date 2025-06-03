@@ -4,9 +4,20 @@
  * File ini ada di dalam: wp-content/plugins/referral-store-promo/templates/single-promo_referral.php
  */
 
+ $terms_conditions  = get_post_meta( $post->ID, '_rsp_promo_terms_conditions', true );
+
 get_header(); // Memuat header tema
 ?>
+<div id="overlay" class="hide">
+    <div class="overlay-content">
+        <p class="overlay-title">Syarat dan Ketentuan</p>
+        <p>
+            <?echo  $terms_conditions  ?>
 
+        </p>
+        <button class="overlay-close">Tutup</button>
+    </div>
+</div>
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
 
@@ -21,18 +32,24 @@ get_header(); // Memuat header tema
                 $end_date          = get_post_meta( get_the_ID(), '_rsp_promo_end_date', true );
                 $terms_conditions  = get_post_meta( get_the_ID(), '_rsp_promo_terms_conditions', true );
                 $promo_link        = get_post_meta( get_the_ID(), '_rsp_promo_link', true );
+                $promo_image_id = get_post_meta( $post->ID, '_rsp_promo_custom_image_id', true );
+                 $promo_image_url = wp_get_attachment_image_url( $promo_image_id, 'full' );
         ?>
 
         <article id="post-<?php the_ID(); ?>"
             <?php post_class( 'promo-referral-single' ); // Tambahkan class CSS khusus ?>>
-            <header class="entry-header">
+            <header class="entry-header single-promo-head">
+                <div>
+                    <button onclick="window.location.href='/promo_referral'" class="backBtn">Promo Lainnya</a>
+                </div>
                 <img class="jete-logo" src="<?php echo esc_url( RSP_PLUGIN_URL . 'assets/images/logo.png' ); ?>"
                     alt="<?php esc_attr_e( 'JETE Indonesia', 'referral-store-promo' ); ?>">
             </header>
 
             <div class="entry-content promo-details">
                 <div class="promo-banner">
-                    <?php the_post_thumbnail( 'full' ); // Tampilkan banner, 'full' bisa diganti dengan size lain (large, medium, etc.) ?>
+                    <img class="jete-logo" src="<?php echo esc_url( $promo_image_url ); ?>"
+                        alt="<?php esc_attr_e( 'JETE Indonesia', 'referral-store-promo' ); ?>">
                 </div>
 
                 <div class="promo-body">
@@ -107,9 +124,9 @@ get_header(); // Memuat header tema
                         </a>
                     </div>
 
-                    <p class="sk">
+                    <button class="sk">
                         Syarat & Ketentuan Promo
-                    </p>
+                    </button>
 
 
                     <?php if ( ! empty( $promo_link ) ) : ?>
@@ -126,12 +143,32 @@ get_header(); // Memuat header tema
                 </div>
 
             </div>
+
             <footer class="entry-footer">
                 <?php // Anda bisa menambahkan meta lain di sini jika perlu ?>
             </footer>
             <script>
             // Variabel global untuk tanggal hitung mundur
-            var countdownDate = new Date(Date.parse(new Date()) + 14 * 24 * 60 * 60 * 1000);
+            var endDateFromPHP = <?php echo wp_json_encode($end_date); ?>;
+            countdownDate = new Date(endDateFromPHP);
+
+            let skBtn = document.querySelector('.sk');
+            let ovrlay = document.querySelector('#overlay');
+            let close = document.querySelector('.overlay-close');
+            let bodyy = document.querySelector('body');
+            skBtn.addEventListener('click', () => {
+                ovrlay.classList.toggle("hide");
+                ovrlay.classList.toggle("show");
+                bodyy.style.overflow = 'hidden';
+            })
+
+            close.addEventListener('click', () => {
+                ovrlay.classList.toggle("hide");
+                ovrlay.classList.toggle("show");
+                bodyy.style.overflow = 'auto';
+            })
+
+
 
             // Variabel global untuk elemen DOM
             var daysCard = document.querySelector(".days").querySelector(".flip-card");

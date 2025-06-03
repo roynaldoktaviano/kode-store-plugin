@@ -42,7 +42,7 @@ html {
 
 
 .list-detail {
-    margin: 15vw 0 9vw 0px;
+    margin: 6vw 0 6vw 0px;
 }
 
 .promo-referral-archive-list{
@@ -85,8 +85,8 @@ text-decoration: none !important;
 }
 
 .promo-banner img {
-    width: 65%;
-    height: 230px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
     margin: 0 0 23px 0;
 }
@@ -99,11 +99,11 @@ text-decoration: none !important;
 }
 
 .text-explain {
-     font-size: 14px;
+     font-size: 12px;
     font-family: "Montserrat", sans-serif;
     text-align: center;
     font-style: italic;
-    padding: 0 10px;
+    padding: 0 4vw;
 }
 
 .short_desc_detail{
@@ -116,10 +116,7 @@ text-decoration: none !important;
 
 }
 
-.jete-logo{
-  margin: 0 0 20px 0;
 
-}
 
 .promo-action-link {
     margin-top: 15px;
@@ -140,9 +137,12 @@ text-decoration: none !important;
 .sk {
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
-    margin-top: 20px;
+    margin-top: 7vw;
     font-style: italic;
     margin-bottom: 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .locContainer {
@@ -164,32 +164,120 @@ text-decoration: none !important;
 }
 
 .entry-content.promo-details{
-    background-image: url('../images/bg2.png');
+    background-color: white;
     background-size: cover;
     background-repeat: no-repeat;
     width: auto;
     height: 100%;
     padding-bottom: 17px;
     margin-bottom: 20px;
-    border-radius: 30px;
+    border-radius: 12px;
+    background-position: center;
+}
+
+.promo-archive-content {
+  text-align: left;
+}
+
+.backBtn {
+    background-color: white;
+    font-weight: bold;
+    color: #2E2F38;
+    text-transform: uppercase;
+    border: none;
+    padding: 3vw 4vw;
+    font-size: 3.5vw;
+    border-radius: 8px;
+     font-family: 'DM Sans', sans-serif;
+     /* width: 100%; */
+}
+
+.entry-header {
+      display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header {
+  margin-bottom: 10vw;
+}
+.single-promo-head {
+  margin-bottom: 10vw;
 }
 
 
 .promo-referral-archive-item{
-    background-image: url(../images/bg.png);
+    background-color: white;
     background-size: contain;
     background-repeat: no-repeat;
-    border-radius: 10px;
-    padding: 20px 45px 20px 45px;
+    border-radius: 8px;
+    padding: 3vw 20vw 3vw 6vw;
     display: flex;
     gap: 25px;
     align-items: center;
     height: 105px !important;
 }
 
+.overlay-content {
+  width: 90%;
+    height: fit-content;
+    padding: 5vw 10vw;
+    background-color: white;
+    margin: auto;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.overlay-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4vw;
+}
+
+.hide {
+  opacity: 0;
+ z-index: -1;
+}
+
+.show {
+  opacity: 1;
+  z-index: 10;
+}
+
+.overlay-close {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 4vw;
+  margin-top: 6vw;
+  padding: 2vw 12vw;
+  
+}
+
+body, html, #page {
+  background-color: #FF8400;
+  min-height: 113vh;
+}
+
+#overlay {
+      position: absolute;
+    width: 100%;
+    height: 113vh;
+    background-color: #00000099;
+
+    display: flex;
+}
+
+
+.promo-archive-banner {
+  width: 13vw;
+}
+
 .promo-archive-banner img {
-    height: 75px;
-    width: 94px;
+    height: auto;
+    width: 100%;
     object-fit: contain;
 }
 
@@ -242,9 +330,7 @@ text-decoration: none !important;
   background-color: #d0d0d0;
 }
 
-.page-header {
-    text-align: center;
-}
+
 
 .dial-button-extra {
   font-weight: bold;
@@ -324,9 +410,10 @@ $half-shadow: 0 3px rgba(71, 83, 115, 0.2) inset;
 }
 
 main .cards {
-	display: flex;
-  justify-content: space-evenly;
-  margin-top: 15px;
+	  display: flex;
+    margin: 8px auto 0 auto;
+    gap: 10px;
+    justify-content: center;
 }
 
 main .cards .card {
@@ -357,13 +444,13 @@ main .cards .card .bottom-half,
 main .cards .card .top-flip,
 main .cards .card .bottom-flip {
 	color: #F2F2F2;
-	font-size: 21px;
-	height: 30px;
-	width: 60px;
-	padding: 15px 7px;
-	overflow: hidden;
-	text-align: center;
-	will-change: transform !important;
+    font-size: 36px;
+    height: 30px;
+    width: 60px;
+    padding: 5px 0px;
+    overflow: hidden;
+    text-align: center;
+    will-change: transform !important;
 	
 }
 
@@ -460,11 +547,43 @@ main .cards .card .bottom-flip {
 	.entry-content.promo-details{
     background-size: contain;
     background-position: center;  
-    padding: 3vw 40vw;
+            background-size: contain;
+        background-position: center;
+        padding: 0;
+        width: 30%;
+        margin: 0 auto;
 }
-
+.sk {
+  margin-top: 2vw;
+}
+.backBtn {
+  padding: 1vw 1vw;
+  font-size: 14px;
+}
 .list-detail {
   margin: 2vw 0 1vw 0px;
+}
+.entry-header{
+  padding: 0 ;
+}
+.single-promo-head {
+  margin-bottom: 2vw;
+}
+.promo-archive-banner{
+  width: 4vw;
+}
+.promo-referral-archive-item {
+           padding: 1vw 4vw 1vw 2vw;
+        height: fit-content !important;
+}
+.promo-archive-banner img{
+  width: 100%;
+}
+.page-header{
+  margin-bottom: 2vw;
+}
+.promo-referral-archive-list {
+  flex-direction: row;
 }
 
 }

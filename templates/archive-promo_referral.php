@@ -33,7 +33,7 @@ get_header(); // Memuat header tema
                 <?php if ( has_post_thumbnail() ) : // Cek jika ada Banner Promo ?>
                 <div class="promo-archive-banner">
                     <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-                        <?php the_post_thumbnail( 'thumbnail' ); // Tampilkan banner, 'medium' atau 'thumbnail' cocok untuk arsip ?>
+                        <?php the_post_thumbnail( 'full' ); // Tampilkan banner, 'medium' atau 'thumbnail' cocok untuk arsip ?>
                     </a>
                 </div>
                 <?php endif; ?>

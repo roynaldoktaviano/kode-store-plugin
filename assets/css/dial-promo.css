@@ -4,6 +4,10 @@ html {
     background-color: #FF8400;
 }
 
+.waDesc{
+    font-size: 20px !important ;
+}
+
 .dial-pad-container {
     width: 85%;
     /* height: 80%; */
@@ -14,13 +18,22 @@ html {
     font-family: 'Montserrat', sans-serif;
     background-color: #fff;
     box-sizing: border-box;
+    margin-bottom: 5vw;
+    touch-action: manipulation;
+}
+
+.headerr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
 }
 
 .referral-input-section {
     background-color: #FF8400 !important;
     padding: 0 24px;
     text-align: center;
-    margin-top: 18vw; /* Default untuk mobile */
+    margin-top: 2vw; /* Default untuk mobile */
 }
 
 .page-header {
@@ -36,7 +49,7 @@ html {
     width: 100%;
     padding: 10px;
     font-size: 62px;
-    font-weight: bold;
+    font-weight: 900;
     text-align: center;
     box-sizing: border-box;
     border-width: 0 0 8px 0;
@@ -45,6 +58,7 @@ html {
     color: #898989;
     margin-bottom: 34px;
     margin-top: 26px;
+    font-style: italic;
 }
 
 .dial-pad {
@@ -55,8 +69,9 @@ html {
 }
 
 .dial-button {
-    padding: 20px;
-    font-size: 68px;
+        padding: 30px;
+    font-size: 80px;
+
     background-color: #2E2F38;
     border: 1px solid #ddd;
     border-radius: 24px;
@@ -65,6 +80,7 @@ html {
     text-align: center;
     color: #FFFFFF;
     font-family: 'Montserrat', sans-serif;
+     touch-action: manipulation;
 }
 
 .dial-button:hover {
@@ -83,6 +99,7 @@ html {
     display: flex;
     justify-content: space-between;
     gap: 10px;
+    touch-action: manipulation;
 }
 
 .delete-button svg {
@@ -102,6 +119,16 @@ html {
     justify-content: center;
     gap: 8px;
     /* Jarak antara ikon dan teks */
+}
+
+.rsp-claim-ajax-result.rsp-error{
+    background-color: red !important;
+    color: white !important;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    font-style: italic;
+    border-radius: 8px;
 }
 
 .dial-action-button svg {
@@ -148,9 +175,9 @@ html {
 .dial-head p.desc {
     margin: 0;
     text-align: center;
-    font-size: 26px;
+    font-size: 14px;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .orange-text {
@@ -164,9 +191,24 @@ html {
     margin: 32px 0;
 }
 
+.backBtn {
+    background-color: #2E2F38;
+    font-weight: bold;
+    color: white;
+    
+    padding: 3vw 10vw;
+    font-size: 4vw;
+    border-radius: 10px;
+     font-family: 'DM Sans', sans-serif;
+     /* width: 100%; */
+}
+
 .sk {
     margin-top: 72px;
     font-size: 32px;
+    font-style: italic;
+    /* text-decoration: underline; */
+    font-weight: 500;
 }
 
 /* Styling untuk pesan AJAX */
@@ -193,6 +235,54 @@ hr {
 #header {
     display: none;
 }
+
+.overlay-content {
+  width: 70%;
+    height: fit-content;
+    padding: 5vw 10vw;
+    background-color: white;
+    margin: auto;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 34px;
+}
+
+.overlay-title {
+  font-size: 46px;
+  font-weight: bold;
+  margin-bottom: 4vw;
+}
+
+.hide {
+  opacity: 0;
+ z-index: -1;
+}
+
+.show {
+  opacity: 1;
+  z-index: 10;
+}
+
+.overlay-close {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 4vw;
+  margin-top: 6vw;
+  padding: 2vw 12vw;
+  
+}
+
+#overlay {
+      position: absolute;
+    width: 100%;
+    height: 113vh;
+    background-color: #00000099;
+
+    display: flex;
+}
+
 
 
 /* Media query yang Anda komentari, bisa diaktifkan jika diperlukan */
@@ -227,40 +317,40 @@ hr {
 /* Jika ini untuk mobile, maka seharusnya tidak ada !important di margin-top */
  @media screen and (max-width: 600px) {
     .referral-input-section {
-        margin-top: 0px; /* Jika ini adalah default mobile, !important tidak diperlukan jika min-width di atasnya tidak menggunakan !important */
+        margin-top: 0px !important; /* Jika ini adalah default mobile, !important tidak diperlukan jika min-width di atasnya tidak menggunakan !important */
     }
 
     .jete-logo {
         width: 40vw; /* 10vw terlalu kecil untuk logo di mobile, sesuaikan */
-        margin: 20px 0;
+        margin:0 0 20px 0;
     }
     .dial-pad-container {
-        width: 90%; /* Sedikit lebih lebar di mobile */
-        padding: 40px 20px; /* Kurangi padding di mobile */
+        width: 68%; /* Sedikit lebih lebar di mobile */
+        padding: 40px 25px; /* Kurangi padding di mobile */
     }
      #phoneNumberDisplay {
         font-size: 38px; /* Lebih kecil di mobile */
     }
     .dial-button {
-        font-size: 32px; /* Lebih kecil di mobile */
+        font-size: 48px; /* Lebih kecil di mobile */
         padding: 15px;
-        gap: 20px; /* Kurangi gap di mobile */
+        gap: 10px; /* Kurangi gap di mobile */
     }
      .dial-action-button {
-        font-size: 30px;
+        font-size: 54px;
     }
     .delete-button svg {
         width: 32px; /* Lebih kecil di mobile */
         height: 32px;
     }
     .dial-head p.heading {
-        font-size: 30px; /* Lebih kecil di mobile */
+        font-size: 60px; /* Lebih kecil di mobile */
     }
     .dial-head p.desc {
-        font-size: 16px; /* Lebih kecil di mobile */
+        font-size: 28px; /* Lebih kecil di mobile */
     }
     .sk {
-        font-size: 20px; /* Lebih kecil di mobile */
+        font-size: 32px; /* Lebih kecil di mobile */
         margin-top: 40px;
     }
 }
