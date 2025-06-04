@@ -44,10 +44,7 @@ get_header(); // Memuat header tema
                     <header class="entry-header">
                         <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
                     </header><?php if ( ! empty( $short_description ) ) : ?>
-                    <div class="promo-archive-short-description">
-                        <p><?php echo esc_html( wp_trim_words( $short_description, 20, '...' ) ); // Ambil 20 kata pertama ?>
-                        </p>
-                    </div>
+
                     <?php endif; ?>
 
                     <?php if ( ! empty( $start_date ) || ! empty( $end_date ) ) : ?>

@@ -5,9 +5,21 @@
  */
 
  $terms_conditions  = get_post_meta( $post->ID, '_rsp_promo_terms_conditions', true );
+ $promo_description  = get_post_meta( $post->ID, '_rsp_promo_description', true );
 
 get_header(); // Memuat header tema
 ?>
+<div id="overlay-desc" class="hide">
+    <div class="overlay-content">
+        <p class="overlay-title">Promo Detail Description</p>
+        <div class="prom-desc">
+            <?echo  wpautop($promo_description)  ?>
+        </div>
+
+
+        <button class="overlay-close-desc">Tutup</button>
+    </div>
+</div>
 <div id="overlay" class="hide">
     <div class="overlay-content">
         <p class="overlay-title">Syarat dan Ketentuan</p>
@@ -55,8 +67,13 @@ get_header(); // Memuat header tema
                 <div class="promo-body">
                     <?php if ( ! empty( $short_description ) ) : ?>
                     <div class="promo-short-description">
-                        <h2 class="entry-title-detail">Promo <?php echo nl2br( esc_html( $short_description ) ); ?></h2>
-                        <?php the_title( sprintf( '<p class="short_desc_detail">', esc_url( get_permalink() ) ), '</p>' ); ?>
+                        <div class="title-promo-container">
+                            <h2 class="entry-title-detail">
+                                <?php the_title( sprintf( '<p class="promo-title">', esc_url( get_permalink() ) ), '</p>' ); ?>
+                            </h2>
+                            <p class="see-detail-promo">Lihat Detail</p>
+                        </div>
+                        <p class="short_desc_detail"><?php echo nl2br( esc_html( $short_description ) ); ?></p>
                     </div>
                     <?php endif; ?>
 
@@ -153,18 +170,32 @@ get_header(); // Memuat header tema
             countdownDate = new Date(endDateFromPHP);
 
             let skBtn = document.querySelector('.sk');
+            let seeDetail = document.querySelector('.see-detail-promo');
             let ovrlay = document.querySelector('#overlay');
+            let ovrlayDesc = document.querySelector('#overlay-desc');
             let close = document.querySelector('.overlay-close');
+            let closeDesc = document.querySelector('.overlay-close-desc');
             let bodyy = document.querySelector('body');
             skBtn.addEventListener('click', () => {
                 ovrlay.classList.toggle("hide");
                 ovrlay.classList.toggle("show");
                 bodyy.style.overflow = 'hidden';
             })
+            seeDetail.addEventListener('click', () => {
+                ovrlayDesc.classList.toggle("hide");
+                ovrlayDesc.classList.toggle("show");
+                bodyy.style.overflow = 'hidden';
+            })
 
             close.addEventListener('click', () => {
                 ovrlay.classList.toggle("hide");
                 ovrlay.classList.toggle("show");
+                bodyy.style.overflow = 'auto';
+            })
+
+            closeDesc.addEventListener('click', () => {
+                ovrlayDesc.classList.toggle("hide");
+                ovrlayDesc.classList.toggle("show");
                 bodyy.style.overflow = 'auto';
             })
 
