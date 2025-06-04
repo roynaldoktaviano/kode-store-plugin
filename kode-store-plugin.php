@@ -26,6 +26,68 @@ if ( ! defined( 'RSP_PLUGIN_URL' ) ) {
     define( 'RSP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
+// Table untuk simpan data Klaim Promo
+register_activation_hook(__FILE__, 'create_table_klaim_promo');
+
+function create_table_klaim_promo() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'klaim_promo';
+
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        nama_store varchar(100) NOT NULL,
+        no_whatsapp varchar(100) NOT NULL,
+        kode_store varchar(100) NOT NULL,
+        kode_promo varchar(100) NOT NULL,
+        tanggal_klaim datetime DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+
+add_action('wp_ajax_rsp_claim_promo', 'handle_rsp_claim_promo');
+add_action('wp_ajax_nopriv_rsp_claim_promo', 'handle_rsp_claim_promo');
+
+function handle_rsp_claim_promo() {
+    check_ajax_referer('rsp_claim_promo_nonce', 'nonce');
+
+    $kode_store  = sanitize_text_field($_POST['kode_store'] ?? '');
+    $no_whatsapp = sanitize_text_field($_POST['nomor_wa'] ?? '');
+    $kode_promo  = sanitize_text_field($_POST['kode_promo'] ?? '');
+    $nama_store  = sanitize_text_field($_POST['nama_store'] ?? '');
+
+    if (empty($kode_store) || empty($no_whatsapp) || empty($kode_promo) || empty($nama_store)) {
+        wp_send_json_error('Data tidak lengkap.');
+    }
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'klaim_promo';
+
+    $result = $wpdb->insert(
+        $table_name,
+        [
+            'nama_store'     => $nama_store,
+            'no_whatsapp'    => $no_whatsapp,
+            'kode_store'     => $kode_store,
+            'kode_promo'     => $kode_promo,
+            'tanggal_klaim'  => current_time('mysql'),
+        ],
+        [ '%s', '%s', '%s', '%s', '%s' ]
+    );
+
+    if ($result === false) {
+        wp_send_json_error('Gagal menyimpan data klaim.');
+    }
+
+    wp_send_json_success('Berhasil disimpan.');
+}
+
+
 /**
  * Mendaftarkan dan memuat aset (CSS & JS) Frontend.
  */
@@ -647,6 +709,12 @@ function rsp_handle_ajax_process_claim_server_side() {
 
     $kode_store = isset($_POST['kode_store']) ? sanitize_text_field($_POST['kode_store']) : '';
     $promo_slug = isset($_POST['promo_slug']) ? sanitize_text_field($_POST['promo_slug']) : '';
+    $whatsapp = isset($_POST['whatsapp']) ? sanitize_text_field($_POST['whatsapp']) : '';
+
+    $kode_store = sanitize_text_field( trim( $_POST['kode_store'] ) );
+        // error_log('[RSP DEBUG] Kode Store Diterima AJAX: ' . $kode_store); // Uncomment untuk debugging
+
+    $store_data = get_doran_lokasi_data_from_api_rsp( $kode_store );
 
     if ( empty($kode_store) || empty($promo_slug) ) {
         wp_send_json_error(array('message' => __('Data tidak lengkap.', 'referral-store-promo')));
@@ -654,6 +722,14 @@ function rsp_handle_ajax_process_claim_server_side() {
     }
 
     $promo_post = get_page_by_path($promo_slug, OBJECT, RSP_PLUGIN_SLUG);
+
+    
+
+    if ($result === false) {
+        wp_send_json_error('Gagal menyimpan data klaim.');
+    }
+
+    wp_send_json_success('Berhasil disimpan.');
 
     if ( ! $promo_post || $promo_post->post_status !== 'publish' ) {
         wp_send_json_error(array('message' => __('Promo tidak valid.', 'referral-store-promo')));

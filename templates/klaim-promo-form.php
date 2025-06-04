@@ -4,6 +4,7 @@
  * Variabel global $rsp_claim_form_data akan berisi data promo.
  */
 
+
 global $rsp_claim_form_data;
 global $post; // $post di-set oleh rsp_claim_template_redirect
 
@@ -110,10 +111,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     skBtn.addEventListener('click', () => {
-        /* ... */
+        ovrlay.classList.toggle("hide");
+        ovrlay.classList.toggle("show");
+        bodyy.style.overflow = 'hidden';
     });
     close.addEventListener('click', () => {
-        /* ... */
+        ovrlay.classList.toggle("hide");
+        ovrlay.classList.toggle("show");
+        bodyy.style.overflow = 'auto';
     });
 
     if (!display || !submitDialButton || !headingElement || !descElement) {
@@ -121,14 +126,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+
+
+
     let currentInputStep = 'kodeStore';
     let collectedKodeStore = '';
     let storeNameValidated = '';
 
     const jsKodePromo = VJS_KODE_PROMO; // Menggunakan variabel yang sudah disiapkan
 
+
+
+
     function updateDialPadUI(step) {
         /* ... sama ... */
+
         display.value = '';
         if (step === 'kodeStore') {
             headingElement.textContent = 'Masukan Kode Kasir';
@@ -164,8 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
+
     if (submitDialButton) {
-        submitDialButton.addEventListener('click', function() {
+        submitDialButton.addEventListener('click', async function() {
             const currentDisplayValue = display.value.trim();
             const originalButtonHtml = this.innerHTML;
 
@@ -208,18 +222,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(response => {
                         /* ... sama ... */
                         if (!response.ok) {
-                            return response.json().catch(() => response.text()).then(errData => {
-                                let errMsg =
-                                    `Error ${response.status}: ${response.statusText}`;
-                                if (typeof errData === 'object' && errData.data && errData
-                                    .data.message) {
-                                    errMsg = errData.data.message;
-                                } else if (typeof errData === 'string' && errData.length >
-                                    0 && errData.length < 200) {
-                                    errMsg = errData;
-                                }
-                                throw new Error(errMsg);
-                            });
+                            return response.json().catch(() => response.text()).then(
+                                errData => {
+                                    let errMsg =
+                                        `Error ${response.status}: ${response.statusText}`;
+                                    if (typeof errData === 'object' && errData.data &&
+                                        errData
+                                        .data.message) {
+                                        errMsg = errData.data.message;
+                                    } else if (typeof errData === 'string' && errData
+                                        .length >
+                                        0 && errData.length < 200) {
+                                        errMsg = errData;
+                                    }
+                                    throw new Error(errMsg);
+                                });
                         }
                         return response.json();
                     })
@@ -229,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         this.innerHTML = originalButtonHtml;
                         if (result.success) {
                             collectedKodeStore = currentDisplayValue;
+
                             storeNameValidated = result.data.store_name || '';
                             currentInputStep = 'whatsapp';
                             updateDialPadUI(currentInputStep);
@@ -246,12 +264,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         } else {
                             if (ajaxResultDiv) {
-                                ajaxResultDiv.textContent = (result.data && result.data.message) ?
+                                ajaxResultDiv.textContent = (result.data && result.data
+                                        .message) ?
                                     result.data.message : 'Kode Store tidak valid.';
                                 ajaxResultDiv.classList.add('rsp-error');
                                 ajaxResultDiv.style.display = 'block';
                             } else {
-                                alert((result.data && result.data.message) ? result.data.message :
+                                alert((result.data && result.data.message) ? result.data
+                                    .message :
                                     'Kode Store tidak valid.');
                             }
                         }
@@ -312,6 +332,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     return;
                 }
+
+                async function fetchClaimById(id) {
+                    try {
+                        const response = await fetch(
+                            `https://kasir.doran.id/api/transaction/lokasi_pick_up?X-API-KEY=doran_data&id=${encodeURIComponent(id)}`
+                        );
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+
+                        // Perbaikan di sini
+                        const item = data.data.find(obj => obj.kode === Number(id));
+
+                        return item ? item.nama_display : 'Kosong';
+
+                    } catch (error) {
+                        console.error('Fetch claim by ID failed:', error);
+                        return null;
+                    }
+                }
+
+
+
+
+
+                fetch(VJS_AJAX_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            action: 'rsp_claim_promo',
+                            nonce: VJS_NONCE,
+                            nama_store: await fetchClaimById(collectedKodeStore),
+                            kode_store: collectedKodeStore,
+                            nomor_wa: noWhatsapp,
+                            kode_promo: VJS_KODE_PROMO
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = VJS_THANKYOU_PAGE_URL;
+                        } else {
+                            alert(data.data);
+                        }
+                    });
 
                 this.disabled = true;
                 this.innerHTML = VJS_SUBMITTING_TEXT;
@@ -406,7 +476,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             ajaxResultDiv.classList.remove('rsp-error', 'rsp-success');
 
-                            ajaxResultDiv.classList.add(isSuccess ? 'rsp-success' : 'rsp-error');
+                            ajaxResultDiv.classList.add(isSuccess ? 'rsp-success' :
+                                'rsp-error');
 
                             ajaxResultDiv.style.display = 'block';
 
@@ -449,6 +520,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+
+
 
     // Pengecekan akhir (opsional, karena kita mencetak langsung dari PHP)
     if (!VJS_AJAX_URL || !VJS_NONCE) {
