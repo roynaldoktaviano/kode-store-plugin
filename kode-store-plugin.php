@@ -382,7 +382,7 @@ function rsp_render_promo_details_meta_box_content( $post ) {
             <?php
                 wp_editor( $description , 'rsp_promo_description', array(
                     'textarea_name' => 'rsp_promo_description',
-                    'media_buttons' => false,
+                    'media_buttons' => true,
                     'textarea_rows' => 10,
                     'teeny'         => true,
                 ) );
@@ -708,8 +708,8 @@ if (!function_exists('rsp_handle_validate_store_code')) {
         if ( $store_data && isset( $store_data[0]['nama'] ) ) {
             wp_send_json_success(
                 array(
-                    'message'    => 'Kode Store Valid: ' . esc_html( $store_data[0]['nama'] ),
-                    'store_name' => esc_html( $store_data[0]['nama'] ),
+                    'message'    => 'Kode Store Valid: ' . esc_html( $store_data[0]['name'] ),
+                    'store_name' => esc_html( $store_data[0]['name'] ),
                 )
             );
         } else {

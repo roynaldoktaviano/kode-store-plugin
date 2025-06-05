@@ -26,6 +26,8 @@ get_header(); // Memuat header tema
                 $short_description = get_post_meta( get_the_ID(), '_rsp_promo_short_description', true );
                 $start_date        = get_post_meta( get_the_ID(), '_rsp_promo_start_date', true );
                 $end_date          = get_post_meta( get_the_ID(), '_rsp_promo_end_date', true );
+                $promo_image_id = get_post_meta( $post->ID, '_rsp_promo_custom_image_id', true );
+                 $promo_image_url = wp_get_attachment_image_url( $promo_image_id, 'full' );
             ?>
             <article id="post-<?php the_ID(); ?>"
                 <?php post_class( 'promo-referral-archive-item' ); // Tambahkan class CSS khusus ?>>
@@ -33,7 +35,8 @@ get_header(); // Memuat header tema
                 <?php if ( has_post_thumbnail() ) : // Cek jika ada Banner Promo ?>
                 <div class="promo-archive-banner">
                     <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-                        <?php the_post_thumbnail( 'full' ); // Tampilkan banner, 'medium' atau 'thumbnail' cocok untuk arsip ?>
+                        <img class="jete-logo" src="<?php echo esc_url( $promo_image_url ); ?>"
+                            alt="<?php esc_attr_e( 'JETE Indonesia', 'referral-store-promo' ); ?>">
                     </a>
                 </div>
                 <?php endif; ?>

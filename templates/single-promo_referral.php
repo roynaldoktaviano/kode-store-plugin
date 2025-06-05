@@ -56,12 +56,13 @@ get_header(); // Memuat header tema
                 </div>
                 <img class="jete-logo" src="<?php echo esc_url( RSP_PLUGIN_URL . 'assets/images/logo.png' ); ?>"
                     alt="<?php esc_attr_e( 'JETE Indonesia', 'referral-store-promo' ); ?>">
+
             </header>
 
             <div class="entry-content promo-details">
                 <div class="promo-banner">
-                    <img class="jete-logo" src="<?php echo esc_url( $promo_image_url ); ?>"
-                        alt="<?php esc_attr_e( 'JETE Indonesia', 'referral-store-promo' ); ?>">
+                    <?php the_post_thumbnail( 'full' ); ?>
+
                 </div>
 
                 <div class="promo-body">

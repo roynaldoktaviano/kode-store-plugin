@@ -299,6 +299,15 @@ body, html, #page {
     display: flex;
 }
 
+#overlay-confirm {
+    position: absolute;
+    width: 100%;
+    height: 113vh;
+    background-color: #00000099;
+
+    display: flex;
+}
+
 #overlay-desc {
       position: absolute;
     width: 100%;

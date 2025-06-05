@@ -42,6 +42,16 @@ get_header();
         <button class="overlay-close">Tutup</button>
     </div>
 </div>
+<div id="overlay-confirm" class="hide">
+    <div class="overlay-content">
+        <p class="overlay-title">Konfirmasi Lokasi</p>
+        <p class="location-confirm">
+
+        </p>
+        <p style="font-weight:bold">Lajut Masukkan No. Whatsapp Customer</p>
+        <button class="overlay-close-confirm">Oke</button>
+    </div>
+</div>
 <div id="primary" class="content-area rsp-claim-form-page">
     <div class="referral-input-section">
         <div class="headerr">
@@ -108,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const VJS_VALIDATING_TEXT = '<?php echo esc_js($js_validating_text); ?>';
     const VJS_WEBHOOK_URL = '<?php echo esc_js($js_webhook_url); ?>';
     const VJS_THANKYOU_PAGE_URL = '<?php echo esc_js($js_thankyou_page_url); ?>';
+
 
 
     skBtn.addEventListener('click', () => {
@@ -187,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 /* ... reset ... */
             }
 
+
             if (currentInputStep === 'kodeStore') {
                 if (currentDisplayValue.length === 0) {
                     if (ajaxResultDiv) {
@@ -247,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (result.success) {
                             collectedKodeStore = currentDisplayValue;
 
-                            storeNameValidated = result.data.store_name || '';
+                            storeNameValidated = result.data.message || '';
                             currentInputStep = 'whatsapp';
                             updateDialPadUI(currentInputStep);
                             if (ajaxResultDiv) {
@@ -256,6 +268,23 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ajaxResultDiv.classList.remove('rsp-error');
                                 ajaxResultDiv.classList.add('rsp-success');
                                 ajaxResultDiv.style.display = 'block';
+                                let ovrlay = document.querySelector('#overlay-confirm');
+                                let close = document.querySelector('.overlay-close-confirm');
+                                let locConfirm = document.querySelector('.location-confirm');
+
+                                let bodyy = document.querySelector('body');
+
+                                ovrlay.classList.toggle("hide");
+                                ovrlay.classList.toggle("show");
+                                bodyy.style.overflow = 'hidden';
+                                locConfirm.classList.add('rsp-success');
+                                locConfirm.innerText = storeNameValidated;
+
+                                close.addEventListener('click', () => {
+                                    ovrlay.classList.toggle("hide");
+                                    ovrlay.classList.toggle("show");
+                                    bodyy.style.overflow = 'auto';
+                                });
 
                                 setTimeout(() => {
                                     if (ajaxResultDiv.classList.contains('rsp-success'))
