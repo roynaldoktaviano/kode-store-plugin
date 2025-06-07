@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:      Kode Store Promo
- * Description:      Promo dengan Input Kode Store
- * Version:          1.3.0
+ * Plugin Name:      JETE - Dial Promo Store
+ * Description:      Promo dengan Dial Input Kode Store
+ * Version:          2.0.0
  * Author:           PT Doran Sukses Indonesia
  * Author URI:       https://doran.id/
  * License:          GPL v2 or later
@@ -352,7 +352,6 @@ function rsp_render_promo_details_meta_box_content( $post ) {
     wp_nonce_field( 'rsp_save_promo_details_meta_data_action', 'rsp_promo_details_nonce' );
 
     $short_description = get_post_meta( $post->ID, '_rsp_promo_short_description', true );
-    $description = get_post_meta( $post->ID, '_rsp_promo_description', true );
     $start_date        = get_post_meta( $post->ID, '_rsp_promo_start_date', true );
     $end_date          = get_post_meta( $post->ID, '_rsp_promo_end_date', true );
     $terms_conditions  = get_post_meta( $post->ID, '_rsp_promo_terms_conditions', true );
@@ -370,23 +369,8 @@ function rsp_render_promo_details_meta_box_content( $post ) {
                 for="rsp_promo_short_description"><?php _e( 'Deskripsi Singkat Promo', 'referral-store-promo' ); ?></label>
         </th>
         <td>
-            <textarea id="rsp_promo_short_description" name="rsp_promo_short_description" rows="3"
+            <textarea id="rsp_promo_short_description" name="rsp_promo_short_description" rows="4"
                 class="large-text"><?php echo esc_textarea( $short_description ); ?></textarea>
-        </td>
-    </tr>
-    <tr valign="top">
-        <th scope="row">
-            <label for="rsp_promo_description"><?php _e( 'Deskripsi Promo', 'referral-store-promo' ); ?></label>
-        </th>
-        <td>
-            <?php
-                wp_editor( $description , 'rsp_promo_description', array(
-                    'textarea_name' => 'rsp_promo_description',
-                    'media_buttons' => true,
-                    'textarea_rows' => 10,
-                    'teeny'         => true,
-                ) );
-                ?>
         </td>
     </tr>
     <tr valign="top">
@@ -508,9 +492,6 @@ function rsp_save_promo_details_meta_data( $post_id ) {
 
     if ( isset( $_POST['rsp_promo_short_description'] ) ) {
         update_post_meta( $post_id, '_rsp_promo_short_description', sanitize_textarea_field( $_POST['rsp_promo_short_description'] ) );
-    }
-    if ( isset( $_POST['rsp_promo_description'] ) ) {
-        update_post_meta( $post_id, '_rsp_promo_description', sanitize_textarea_field( $_POST['rsp_promo_description'] ) );
     }
     if ( isset( $_POST['rsp_promo_start_date'] ) ) {
         update_post_meta( $post_id, '_rsp_promo_start_date', sanitize_text_field( $_POST['rsp_promo_start_date'] ) );
@@ -708,8 +689,8 @@ if (!function_exists('rsp_handle_validate_store_code')) {
         if ( $store_data && isset( $store_data[0]['nama'] ) ) {
             wp_send_json_success(
                 array(
-                    'message'    => 'Kode Store Valid: ' . esc_html( $store_data[0]['name'] ),
-                    'store_name' => esc_html( $store_data[0]['name'] ),
+                    'message'    => 'Kode Store Valid: ' . esc_html( $store_data[0]['nama'] ),
+                    'store_name' => esc_html( $store_data[0]['nama'] ),
                 )
             );
         } else {

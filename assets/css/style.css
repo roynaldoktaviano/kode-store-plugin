@@ -45,34 +45,6 @@ html {
     margin: 6vw 0 6vw 0px;
 }
 
-.prom-desc{
-      font-size: 12px;
-    line-height: 160%;
-}
-
-.promo-title {
-  font-size: 18px;
-}
-
-.title-promo-container{
-  padding: 0 20px;
-  margin-bottom: 16px;
-}
-
-.see-detail-promo{
-  font-size: 14px;
-  color: orange;
-  font-weight: bold;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.title-promo-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .promo-referral-archive-list{
     display: flex;
     flex-direction: column;
@@ -81,7 +53,7 @@ html {
 }
 
 .promo-archive-period p {
-    margin: 16px 0 0 0 ;
+    margin: 0 ;
     font-size: 12px;
     font-weight: 400;
     color: #00000077;
@@ -115,17 +87,16 @@ text-decoration: none !important;
 .promo-banner img {
     width: 100%;
     height: auto;
-    object-fit: contain;
-    margin: 0 0 23px 0;
+    margin: 0 0 15px 0;
+    aspect-ratio: 5 / 3;
+    object-fit: cover;
 }
 
 .promo-archive-short-description p, .short_desc_detail {
-    margin-top: 0;
+    margin: 0;
     font-size: 14px;
-
+    text-transform: uppercase;
     font-family: "Montserrat", sans-serif;
-    text-align: left;
-    margin: 0 20px;
 }
 
 .text-explain {
@@ -136,14 +107,15 @@ text-decoration: none !important;
     padding: 0 4vw;
 }
 
+.short_desc_detail{
+    text-align: center;
+}
 
 .txt-orange {
     font-weight: bold;
     color: #DA7502;
 
 }
-
-
 
 .promo-action-link {
     margin-top: 15px;
@@ -238,7 +210,7 @@ text-decoration: none !important;
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 8px;
-    padding: 3vw 20vw 3vw 6vw;
+    padding: 3vw 20vw 3vw 6vw !important;
     display: flex;
     gap: 25px;
     align-items: center;
@@ -256,8 +228,6 @@ text-decoration: none !important;
     font-size: 14px;
 }
 
-
-
 .overlay-title {
   font-size: 24px;
   font-weight: bold;
@@ -274,7 +244,7 @@ text-decoration: none !important;
   z-index: 10;
 }
 
-.overlay-close, .overlay-close-desc {
+.overlay-close {
   background-color: red;
   color: white;
   border: none;
@@ -287,39 +257,79 @@ text-decoration: none !important;
 
 body, html, #page {
   background-color: #FF8400;
-  min-height: 113vh;
-}
-
-#overlay {
-      position: absolute;
-    width: 100%;
-    height: 113vh;
-    background-color: #00000099;
-
-    display: flex;
-}
-
-#overlay-confirm {
-    position: absolute;
-    width: 100%;
-    height: 113vh;
-    background-color: #00000099;
-
-    display: flex;
+  min-height: 100vh;
 }
 
 #overlay-desc {
       position: absolute;
     width: 100%;
-    height: 113vh;
+    height: 100%;
     background-color: #00000099;
 
+    display: flex;
+}
+
+.overlay-close, .overlay-close-desc {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 4vw;
+  margin-top: 6vw;
+  padding: 2vw 12vw;
+  
+}
+
+#overlay {
+      position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: #00000099;
+    top:0;
+    bottom:0;
     display: flex;
 }
 
 
 .promo-archive-banner {
   width: 13vw;
+}
+
+
+.prom-desc{
+      font-size: 12px;
+    line-height: 160%;
+}
+
+.promo-title {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: bold;
+}
+
+.title-promo-container{
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promo-archive-short-description p, .short_desc_detail {
+    margin-top: 0;
+    font-size: 14px;
+
+    font-family: "Montserrat", sans-serif !important;
+    text-align: left;
+    padding: 0 20px;
+}
+
+
+.see-detail-promo{
+  font-size: 14px;
+  color: orange;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .promo-archive-banner img {
@@ -491,9 +501,9 @@ main .cards .card .bottom-half,
 main .cards .card .top-flip,
 main .cards .card .bottom-flip {
 	color: #F2F2F2;
-        font-size: 20px;
-    height: 19px;
-    width: 50px;
+    font-size: 36px;
+    height: 22px;
+    width: 60px;
     padding: 5px 0px;
     overflow: hidden;
     text-align: center;

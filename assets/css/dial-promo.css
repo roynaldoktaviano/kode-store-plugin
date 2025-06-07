@@ -64,7 +64,6 @@ html {
 .dial-pad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* 3 kolom */
     gap: 48px;
 }
 
@@ -219,12 +218,10 @@ html {
     text-align: center;
     font-size: 16px; /* Sesuaikan */
 }
-.rsp-success {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 8px 16px;
-    font-weight: bold;
-    border: 1px solid #c3e6cb;
+.rsp-claim-ajax-result.rsp-success {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border: 1px solid #c3e6cb !important;
 }
 .rsp-claim-ajax-result.rsp-error {
     background-color: #f8d7da;
@@ -287,25 +284,24 @@ hr {
   
 }
 
+#overlay-confirm {
+    position: absolute;
+    width: 100%;
+    height: 100vh !important;
+    background-color: #00000099;
+    display: flex;
+    top: 0 !important;
+}
+
 #overlay {
       position: absolute;
     width: 100%;
     height: 100%;
     background-color: #00000099;
-
+    top:0;
+    bottom:0;
     display: flex;
 }
-
-
-#overlay-confirm {
-      position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #00000099;
-
-    display: flex;
-}
-
 
 
 
@@ -330,8 +326,8 @@ hr {
         /* padding: 15px;
     }
     .dial-head p.heading {
-        font-size: 40px; /* Sesuaikan ukuran font untuk desktop */
-    /* }
+        font-size: 40px; /* Sesuaikan ukuran font untuk desktop 
+     }
     .dial-head p.desc {
         font-size: 20px; /* Sesuaikan ukuran font untuk desktop */
     /* }
@@ -343,38 +339,76 @@ hr {
     .referral-input-section {
         margin-top: 0px !important; /* Jika ini adalah default mobile, !important tidak diperlukan jika min-width di atasnya tidak menggunakan !important */
     }
+    
+    .dial-pad {
+    gap: 26px;
+    }
+    
+    .headerr {
+        padding: 0px;
+        margin-bottom: 20px;
+        margin-top: 0px;
+    }
+    
+    .overlay-title {
+    font-size: 20px;
+    margin-bottom: 0vw;
+    }
+    
+    .overlay-content {
+        width: 90%;
+    }
+    
+    .overlay-content p {
+        font-size: 16px;
+    }
 
     .jete-logo {
         width: 40vw; /* 10vw terlalu kecil untuk logo di mobile, sesuaikan */
-        margin:0 0 20px 0;
+        margin:0 0 0 0;
     }
     .dial-pad-container {
-        width: 68%; /* Sedikit lebih lebar di mobile */
-        padding: 40px 25px; /* Kurangi padding di mobile */
+        width: 100%; /* Sedikit lebih lebar di mobile */
+        padding: 30px 25px;
+        margin: 0;
     }
      #phoneNumberDisplay {
-        font-size: 38px; /* Lebih kecil di mobile */
+        font-size: 30px; /* Lebih kecil di mobile */
+        margin-top:0px;
+        margin-bottom:18px;
     }
     .dial-button {
-        font-size: 48px; /* Lebih kecil di mobile */
-        padding: 15px;
-        gap: 10px; /* Kurangi gap di mobile */
+        font-size: 28px; /* Lebih kecil di mobile */
+        padding: 12px;
+        border-radius: 6px;
     }
      .dial-action-button {
-        font-size: 54px;
+        font-size: 28px;
+        border-radius:8px;
+    }
+    img.wp-smiley, img.emoji {
+        height: 28px;
+        width: 28px;
     }
     .delete-button svg {
-        width: 32px; /* Lebih kecil di mobile */
-        height: 32px;
+        width: 28px; /* Lebih kecil di mobile */
+        height: 28px;
     }
     .dial-head p.heading {
-        font-size: 60px; /* Lebih kecil di mobile */
+        font-size: 32px; /* Lebih kecil di mobile */
     }
     .dial-head p.desc {
-        font-size: 28px; /* Lebih kecil di mobile */
+        font-size: 16px; /* Lebih kecil di mobile */
+        margin-bottom: 18px;
+    }
+    .rsp-claim-ajax-result.rsp-error {
+        font-size: 11px;
+    }
+    .dial-pad-display-area {
+        margin-bottom:20px;
     }
     .sk {
-        font-size: 32px; /* Lebih kecil di mobile */
-        margin-top: 40px;
+        font-size: 20px; /* Lebih kecil di mobile */
+        margin-top: 20px;
     }
 }
